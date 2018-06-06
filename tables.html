@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Tables</title>
+ <!-- Latest compiled and minified CSS & JS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://code.jquery.com/jquery.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+   <div class="container">
+
+       <div class="jumbotron">
+       <h1>Hot Restaurant</h1>
+       <h3>Current Reservations and Waiting List</h3>
+       <a href="/add"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span> Make Reservation</button></a>
+       </div>
+
+       <div class="row">
+
+           <div class="col-lg-12">
+
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       <h3 class="panel-title"><strong>Current Reservations</strong></h3>
+                   </div>
+                   <div class="panel-body">
+                       <div class="well">
+                           
+                           <div id="current-tables">
+
+                              
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Waiting List</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="well">
+                        
+                        <div id="waiting-list">
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   </div>
+ 
+
+ <script type="text/javascript">
+
+   $.get("/api/tables", function(data) {
+       for(var i = 0; i < data.length; i++) {
+           console.log(data[i].uniqueID);
+
+           var reservation = $('<h1>').text(data[i].uniqueID);
+           // var roleTage = $('<h3>')
+           console.log(reservation);
+
+           
+           if (i < 5){
+            $('#current-tables').append(reservation);
+           } else {
+            
+            $('#waiting-list').append(reservation);
+           }
+            
+       }
+
+      
+   });
+
+   
+ </script>
+</body>
+</html>
